@@ -17,7 +17,7 @@
         document.getElementById('searchForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const query = document.getElementById('query').value;
-            const url = `http://192.168.7.85:8080/search?q=${encodeURIComponent(query)}`;
+            const url = `http://49.232.167.176:9090/search?q=${encodeURIComponent(query)}`;
             
             fetch(url)
                 .then(response => response.text())
