@@ -1,98 +1,240 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>搜索建议</title>
+    <title>指针骑士搜索引擎</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            color: #333;
         }
-        .search-container {
-            position: relative;
-            width: 300px;
-        }
-        #search-input {
+
+        /* 任务栏样式 */
+        nav {
+            background-color: #1a73e8;
             width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
+            padding: 10px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
         }
-        .suggestions-box {
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            position: relative;
+            margin-right: 20px;
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li:hover {
+            background-color: #155cbc;
+        }
+
+        /* 下拉菜单 */
+        nav ul li ul {
+            display: none;
             position: absolute;
             top: 100%;
             left: 0;
-            right: 0;
+            background-color: white;
+            color: black;
+            padding: 0;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul li:hover ul {
+            display: block;
+        }
+
+        nav ul li ul li {
+            margin: 0;
+            padding: 10px;
+            width: 200px;
+            white-space: nowrap;
+        }
+
+        nav ul li ul li a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        nav ul li ul li a:hover {
+            color: #1a73e8;
+        }
+
+        /* 搜索部分 */
+        h1 {
+            font-size: 3rem;
+            margin: 50px 0 20px;
+            color: #1a73e8;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        input {
+            width: 400px;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 30px;
             border: 1px solid #ccc;
-            border-top: none;
-            background-color: #fff;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        input::placeholder {
+            color: #bbb;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            box-shadow: 0 3px 10px rgba(26, 115, 232, 0.5);
+            border-color: #1a73e8;
+        }
+
+        button {
+            position: absolute;
+            right: 0;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            margin-left: -80px;
+        }
+
+        button:hover {
+            background-color: #155cbc;
+            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
+        }
+
+        #recommendations {
+            margin-top: 30px;
+            width: 400px;
             max-height: 200px;
             overflow-y: auto;
-            display: none;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px;
         }
-        .suggestion-item {
+
+        .recommendation-item {
             padding: 10px;
             cursor: pointer;
+            color: #1a73e8;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease;
         }
-        .suggestion-item:hover {
-            background-color: #f0f0f0;
+
+        .recommendation-item:hover {
+            background-color: #f4f4f9;
+        }
+
+        .recommendation-item:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 600px) {
+            input {
+                width: 90%;
+            }
+
+            #recommendations {
+                width: 90%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- 任务栏部分 -->
+    <nav>
+        <ul>
+            <li>
+                小组源码
+                <ul>
+                    <li><a href="https://github.com/johnwick020213">成员1</a></li>
+                    <li><a href="https://github.com/johnwick020213">成员2</a></li>
+                    <li><a href="https://github.com/johnwick020213">成员3</a></li>
+                    <li><a href="https://github.com/johnwick020213">成员4</a></li>
+                    <li><a href="https://github.com/johnwick020213">成员5</a></li>
+                    <li><a href="https://github.com/johnwick020213">成员6</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
 
-<div class="search-container">
-    <input type="text" id="search-input" placeholder="输入搜索内容">
-    <div id="suggestions" class="suggestions-box"></div>
-</div>
+    -------
 
-<script>
-    const searchInput = document.getElementById('search-input');
-    const suggestionsBox = document.getElementById('suggestions');
+    <!-- 搜索引擎部分 -->
+    <h1>指针骑士搜索引擎</h1>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="白度一下，你想知道的我们都没有" />
+        <button id="searchButton">搜索</button>
+    </div>
+    <div id="recommendations"></div>
 
-    searchInput.addEventListener('input', function () {
-        const query = this.value.trim();
-        if (query) {
-            fetch(`http://192.168.7.139:8086/advice/${query}`)
-                .then(response => response.json())
-                .then(data => {
-                    showSuggestions(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching suggestions:', error);
-                });
-        } else {
-            suggestionsBox.style.display = 'none';
-        }
-    });
-
-    searchInput.addEventListener('focus', function () {
-        if (suggestionsBox.innerHTML !== '') {
-            suggestionsBox.style.display = 'block';
-        }
-    });
-
-    document.addEventListener('click', function (e) {
-        if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
-            suggestionsBox.style.display = 'none';
-        }
-    });
-
-    function showSuggestions(suggestions) {
-        suggestionsBox.innerHTML = '';
-        suggestions.forEach(suggestion => {
-            const item = document.createElement('div');
-            item.className = 'suggestion-item';
-            item.textContent = suggestion.rep1;
-            item.addEventListener('click', function () {
-                searchInput.value = suggestion.rep1;
-                suggestionsBox.style.display = 'none';
-            });
-            suggestionsBox.appendChild(item);
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var inputValue = this.value;
+            if (inputValue) {
+                fetch(`http://49.232.167.176:8086/advice/${inputValue}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var recommendations = document.getElementById('recommendations');
+                        recommendations.innerHTML = '';
+                        data.forEach(item => {
+                            var div = document.createElement('div');
+                            div.textContent = item;
+                            div.className = 'recommendation-item';
+                            div.addEventListener('click', function() {
+                                window.location.href = `http://49.232.167.176:8086/search/${item}`;
+                            });
+                            recommendations.appendChild(div);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching advice:', error));
+            } else {
+                document.getElementById('recommendations').innerHTML = '';
+            }
         });
-        suggestionsBox.style.display = 'block';
-    }
-</script>
 
+        document.getElementById('searchButton').addEventListener('click', function() {
+            var inputValue = document.getElementById('searchInput').value;
+            if (inputValue) {
+                window.location.href = `http://49.232.167.176:8086/search/${inputValue}`;
+            }
+        });
+    </script>
 </body>
 </html>
