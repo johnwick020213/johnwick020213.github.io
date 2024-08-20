@@ -1,197 +1,98 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>指针骑士搜索引擎</title>
-    <link href="https://cdn.prod.website-files.com/66c2ef25c35b17b547012d7d/css/johns-marvelous-site-3816dd.webflow.b49556209.css" rel="stylesheet">
+    <title>搜索建议</title>
     <style>
-        /* 其他样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
         .search-container {
             position: relative;
-            max-width: 600px;
-            margin: 50px auto;
+            width: 300px;
         }
-        .search-input {
+        #search-input {
             width: 100%;
             padding: 10px;
             box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
         }
-        .dropdown {
+        .suggestions-box {
             position: absolute;
             top: 100%;
             left: 0;
-            width: 100%;
-            background: #fff;
+            right: 0;
             border: 1px solid #ccc;
             border-top: none;
-            border-radius: 0 0 4px 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: none;
+            background-color: #fff;
             max-height: 200px;
             overflow-y: auto;
-            z-index: 10;
+            display: none;
         }
-        .dropdown-item {
+        .suggestion-item {
             padding: 10px;
             cursor: pointer;
-            border-bottom: 1px solid #eee;
         }
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
-        .dropdown-item:hover {
+        .suggestion-item:hover {
             background-color: #f0f0f0;
         }
     </style>
 </head>
 <body>
-    <div id="w-node-_0a62c78a-be07-4b2a-4f13-40d2af26e90d-47012d8e" class="w-layout-layout wf-layout-layout">
-        <div id="w-node-_0a62c78a-be07-4b2a-4f13-40d2af26e90f-47012d8e" class="w-layout-cell cell">
-            <div data-w-id="4f71f739-86cf-4873-4555-54d4f0651312" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="uui-navbar07_component w-nav">
-                <div class="uui-navbar07_container">
-                    <a href="#" class="uui-navbar07_logo-link w-nav-brand">
-                        <div class="uui-logo_component">
-                            <div class="uui-logo_logomark">
-                                <img src="https://cdn.prod.website-files.com/66c2ef25c35b17b547012d7d/66c2feb13d35e24b5bb92efa_logomark-bg.svg" loading="eager" height="" alt="Untitled UI logomark" class="uui-styleguide_logomark-bg"/>
-                                <div class="uui-logo_logomark-blur"></div>
-                                <div class="uui-logo_logomark-dot"></div>
-                            </div>
-                            <img src="https://cdn.prod.website-files.com/66c2ef25c35b17b547012d7d/66c2feb13d35e24b5bb92f2d_untitled-ui-logo.png" loading="lazy" alt="Logo" class="uui-logo_image"/>
-                        </div>
-                    </a>
-                    <aside role="navigation" class="uui-navbar07_menu w-nav-menu">
-                        <div class="uui-navbar07_menu-left">
-                            <div data-hover="true" data-delay="300" data-w-id="4f71f739-86cf-4873-4555-54d4f0651322" class="uui-navbar07_menu-dropdown w-dropdown">
-                                <div class="uui-navbar07_dropdown-toggle w-dropdown-toggle">
-                                    <div class="uui-dropdown-icon w-embed">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-                                    <div>小组源码</div>
-                                </div>
-                                <nav data-w-id="4f71f739-86cf-4873-4555-54d4f0651327" style="opacity:0;-webkit-transform:translate3d(0, -2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, -2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, -2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, -2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="uui-navbar07_dropdown-list w-dropdown-list">
-                                    <div class="uui-navbar07_dropdown-link-list">
-                                        <a href="#" class="uui-navbar07_dropdown-link w-inline-block">
-                                            <div class="uui-navbar07_icon-wrapper"></div>
-                                            <div class="uui-navbar07_item-right">
-                                                <div class="uui-navbar07_item-heading">成员1</div>
-                                                <div class="uui-text-size-small-2">The latest industry news, updates and info.</div>
-                                            </div>
-                                        </a>
-                                        <a href="https://github.com/johnwick020213/Search_Engines" target="_blank" class="uui-navbar07_dropdown-link w-inline-block">
-                                            <div class="uui-navbar07_icon-wrapper"></div>
-                                            <div class="uui-navbar07_item-right">
-                                                <div class="uui-navbar07_item-heading">甘博</div>
-                                                <div class="uui-text-size-small-2">Learn how our customers are making big changes.</div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="uui-navbar07_dropdown-link w-inline-block">
-                                            <div class="uui-navbar07_icon-wrapper"></div>
-                                            <div class="uui-navbar07_item-right">
-                                                <div class="uui-navbar07_item-heading">成员3</div>
-                                                <div class="uui-text-size-small-2">Get up and running on new features and techniques.</div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="uui-navbar07_dropdown-link w-inline-block">
-                                            <div class="uui-navbar07_icon-wrapper"></div>
-                                            <div class="uui-navbar07_item-right">
-                                                <div class="uui-navbar07_item-heading">成员4</div>
-                                                <div class="uui-text-size-small-2">All the boring stuff that you (hopefully won’t) need.</div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="uui-navbar07_dropdown-link w-inline-block">
-                                            <div class="uui-navbar07_icon-wrapper"></div>
-                                            <div class="uui-navbar07_item-right">
-                                                <div class="uui-navbar07_item-heading">成员5</div>
-                                                <div class="uui-text-size-small-2">Learn, fix a problem, and get answers to your questions.</div>
-                                            </div>
-                                        </a>
-                                        <a id="w-node-_27dbd1a1-34f3-9307-e0ff-dcffc7032955-47012d8e" href="#" class="uui-navbar07_dropdown-link w-inline-block">
-                                            <div class="uui-navbar07_icon-wrapper"></div>
-                                            <div class="uui-navbar07_item-right">
-                                                <div class="uui-navbar07_item-heading">成员6</div>
-                                                <div class="uui-text-size-small-2">The latest industry news, updates and info.</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </nav>
-                            </div>
-                            <a href="https://www.bilibili.com/video/BV1y64y1q757/?spm_id_from=333.999.0.0&amp;vd_source=f96b4aabc2b8d1334e62b22bf01fa6dc" class="uui-navbar07_link w-nav-link">这些</a>
-                            <a href="https://ys.mihoyo.com/" class="uui-navbar07_link w-nav-link">按钮</a>
-                            <a href="https://github.com/johnwick020213/johnwick020213.github.io" class="uui-navbar07_link w-nav-link">会</a>
-                        </div>
-                        <div class="uui-navbar07_menu-right">
-                            <div class="uui-navbar07_menu-search">
-                                <div class="search-container">
-                                    <input type="text" id="searchInput" class="search-input" placeholder="输入搜索内容...">
-                                    <div id="dropdown" class="dropdown"></div>
-                                </div>
-                            </div>
-                            <a href="#" class="uui-navbar07_link w-nav-link">体验</a>
-                        </div>
-                    </aside>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.getElementById('searchInput');
-    const dropdown = document.getElementById('dropdown');
+<div class="search-container">
+    <input type="text" id="search-input" placeholder="输入搜索内容">
+    <div id="suggestions" class="suggestions-box"></div>
+</div>
 
-    // 预加载的推荐项
-    const items = [
-        '推荐1',
-        '推荐2',
-        '推荐3',
-        '推荐4',
-        '推荐5'
-    ];
+<script>
+    const searchInput = document.getElementById('search-input');
+    const suggestionsBox = document.getElementById('suggestions');
 
-    // 显示推荐项的函数
-    function showDropdown(items) {
-        dropdown.style.display = 'block';
-        dropdown.innerHTML = '';
-
-        items.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'dropdown-item';
-            div.textContent = item;
-            div.addEventListener('click', function () {
-                searchInput.value = item;
-                dropdown.style.display = 'none';
-            });
-            dropdown.appendChild(div);
-        });
-    }
-
-    // 当用户输入内容时，显示推荐项
     searchInput.addEventListener('input', function () {
-        const query = searchInput.value.trim();
+        const query = this.value.trim();
         if (query) {
-            showDropdown(items.filter(item => item.includes(query)));
+            fetch(`http://192.168.7.139:8086/advice/${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    showSuggestions(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching suggestions:', error);
+                });
         } else {
-            dropdown.style.display = 'none';
+            suggestionsBox.style.display = 'none';
         }
     });
 
-    // 当输入框获得焦点时，显示推荐项
     searchInput.addEventListener('focus', function () {
-        showDropdown(items);
-    });
-
-    // 点击其他地方时，隐藏下拉框
-    document.addEventListener('click', function (event) {
-        if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
-            dropdown.style.display = 'none';
+        if (suggestionsBox.innerHTML !== '') {
+            suggestionsBox.style.display = 'block';
         }
     });
-});
-    </script>
+
+    document.addEventListener('click', function (e) {
+        if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+            suggestionsBox.style.display = 'none';
+        }
+    });
+
+    function showSuggestions(suggestions) {
+        suggestionsBox.innerHTML = '';
+        suggestions.forEach(suggestion => {
+            const item = document.createElement('div');
+            item.className = 'suggestion-item';
+            item.textContent = suggestion.rep1;
+            item.addEventListener('click', function () {
+                searchInput.value = suggestion.rep1;
+                suggestionsBox.style.display = 'none';
+            });
+            suggestionsBox.appendChild(item);
+        });
+        suggestionsBox.style.display = 'block';
+    }
+</script>
+
 </body>
 </html>
