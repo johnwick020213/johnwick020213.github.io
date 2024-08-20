@@ -141,53 +141,57 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const searchInput = document.getElementById('searchInput');
-            const dropdown = document.getElementById('dropdown');
+    const searchInput = document.getElementById('searchInput');
+    const dropdown = document.getElementById('dropdown');
 
-            searchInput.addEventListener('input', function () {
-                const query = searchInput.value.trim();
+    // 预加载的推荐项
+    const items = [
+        '推荐1',
+        '推荐2',
+        '推荐3',
+        '推荐4',
+        '推荐5'
+    ];
 
-                // Show dropdown if there is input
-                if (query) {
-                    dropdown.style.display = 'block';
-                    dropdown.innerHTML = '';
+    // 显示推荐项的函数
+    function showDropdown(items) {
+        dropdown.style.display = 'block';
+        dropdown.innerHTML = '';
 
-                    // Example items for demonstration
-                    const items = [
-                        '结果1',
-                        '结果2',
-                        '结果3',
-                        '结果4',
-                        '结果5'
-                    ];
-
-                    items.forEach(item => {
-                        const div = document.createElement('div');
-                        div.className = 'dropdown-item';
-                        div.textContent = item;
-                        div.addEventListener('click', function () {
-                            searchInput.value = item;
-                            dropdown.style.display = 'none';
-                        });
-                        dropdown.appendChild(div);
-                    });
-                } else {
-                    dropdown.style.display = 'none';
-                }
+        items.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'dropdown-item';
+            div.textContent = item;
+            div.addEventListener('click', function () {
+                searchInput.value = item;
+                dropdown.style.display = 'none';
             });
-
-            document.addEventListener('click', function (event) {
-                if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
-                    dropdown.style.display = 'none';
-                }
-            });
-
-            searchInput.addEventListener('focus', function () {
-                if (searchInput.value.trim()) {
-                    dropdown.style.display = 'block';
-                }
-            });
+            dropdown.appendChild(div);
         });
+    }
+
+    // 当用户输入内容时，显示推荐项
+    searchInput.addEventListener('input', function () {
+        const query = searchInput.value.trim();
+        if (query) {
+            showDropdown(items.filter(item => item.includes(query)));
+        } else {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    // 当输入框获得焦点时，显示推荐项
+    searchInput.addEventListener('focus', function () {
+        showDropdown(items);
+    });
+
+    // 点击其他地方时，隐藏下拉框
+    document.addEventListener('click', function (event) {
+        if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+});
     </script>
 </body>
 </html>
