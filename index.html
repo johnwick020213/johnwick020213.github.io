@@ -209,7 +209,7 @@
         document.getElementById('searchInput').addEventListener('input', function() {
             var inputValue = this.value;
             if (inputValue) {
-                fetch(`http://49.232.167.176:80/advice/${inputValue}`)
+                fetch(`http://49.232.167.176:8086/advice/${inputValue}`)
                     .then(response => response.json())
                     .then(data => {
                         var recommendations = document.getElementById('recommendations');
@@ -219,7 +219,7 @@
                             div.textContent = item;
                             div.className = 'recommendation-item';
                             div.addEventListener('click', function() {
-                                window.location.href = `http://49.232.167.176:80/search/${item}`;
+                                window.location.href = `http://49.232.167.176:8086/search/${item}`;
                             });
                             recommendations.appendChild(div);
                         });
@@ -233,7 +233,7 @@
         document.getElementById('searchButton').addEventListener('click', function() {
             var inputValue = document.getElementById('searchInput').value;
             if (inputValue) {
-                window.location.href = `http://49.232.167.176:80/search/${inputValue}`;
+                window.location.href = `http://49.232.167.176:8086/search/${inputValue}`;
             }
         });
     </script>
