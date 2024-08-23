@@ -261,33 +261,23 @@ button:hover {
     <div id="recommendations"></div>
 
     <script>
-        // 控制背景音乐播放
-        let isPlaying = false;
-        const musicButton = document.getElementById('musicButton');
-        const backgroundMusic = document.getElementById('backgroundMusic');
+    let debounceTimeout; // 定义一个变量来保存定时器
 
-        musicButton.addEventListener('click', function() {
-            if (isPlaying) {
-                backgroundMusic.pause();
-                musicButton.textContent = '播放音乐';
-            } else {
-                backgroundMusic.play();
-                musicButton.textContent = '暂停音乐';
-            }
-            isPlaying = !isPlaying;
-        });
+    // 输入框内容变化时显示推荐内容
+    document.getElementById('searchInput').addEventListener('input', function() {
+        clearTimeout(debounceTimeout); // 清除上一个定时器
+        const inputValue = this.value;
 
-        // 输入框内容变化时显示推荐内容
-        document.getElementById('searchInput').addEventListener('input', function() {
-            var inputValue = this.value;
+        // 设置新的定时器，等待 100 毫秒
+        debounceTimeout = setTimeout(() => {
             if (inputValue) {
                 fetch(`http://49.232.167.176:8086/advice/${inputValue}`)
                     .then(response => response.json())
                     .then(data => {
-                        var recommendations = document.getElementById('recommendations');
+                        const recommendations = document.getElementById('recommendations');
                         recommendations.innerHTML = '';
                         data.forEach(item => {
-                            var div = document.createElement('div');
+                            const div = document.createElement('div');
                             div.textContent = item;
                             div.className = 'recommendation-item';
                             div.addEventListener('click', function() {
@@ -300,15 +290,8 @@ button:hover {
             } else {
                 document.getElementById('recommendations').innerHTML = '';
             }
-        });
-
-        // 点击搜索按钮时跳转到结果页面
-        document.getElementById('searchButton').addEventListener('click', function() {
-            var inputValue = document.getElementById('searchInput').value;
-            if (inputValue) {
-                window.location.href = `result.html?query=${encodeURIComponent(inputValue)}`;
-            }
-        });
-    </script>
+        }, 200); // 等待 100 毫秒后执行
+    });
+</script>
 </body>
 </html>
