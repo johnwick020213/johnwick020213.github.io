@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>指针骑士搜索引擎</title>
     <link rel="icon" type="image/jpeg" href="icon.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Pacifico&display=swap" rel="stylesheet"> <!-- 引入好看的字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -18,7 +18,6 @@
             height: 100vh;
             color: #333;
             position: relative;
-           
         }
 
         body::before {
@@ -30,11 +29,10 @@
             height: 100%;
             background: url('background1.jpg') no-repeat center center;
             background-size: cover;
-            opacity: 0.5; /* 设置透明度 */
-            z-index: -1; /* 使背景图在内容下方 */
+            opacity: 0.5;
+            z-index: -1;
         }
 
-        /* 任务栏样式 */
         nav {
             background-color: #1a73e8;
             width: 100%;
@@ -53,22 +51,21 @@
         }
 
         nav ul li {
-    position: relative;
-    margin-right: 20px;
-    padding: 10px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 增加 box-shadow 过渡效果 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
-    border-radius: 5px; /* 增加圆角 */
-}
+            position: relative;
+            margin-right: 20px;
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
 
-nav ul li:hover {
-    background-color: #155cbc;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 增强阴影效果 */
-}
+        nav ul li:hover {
+            background-color: #155cbc;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
 
-        /* 下拉菜单 */
         nav ul li ul {
             display: none;
             position: absolute;
@@ -102,7 +99,6 @@ nav ul li:hover {
             color: #1a73e8;
         }
 
-        /* 播放音乐按钮 */
         #musicButton {
             position: absolute;
             top: 10px;
@@ -120,13 +116,12 @@ nav ul li:hover {
             background-color: #155cbc;
         }
 
-        /* 搜索部分 */
         h1 {
-            font-size: 5rem; /* 更大字体 */
+            font-size: 5rem;
             margin: 50px 0 20px;
             text-align: center;
-            font-family: 'Pacifico', cursive; /* 好看的字体 */
-            animation: colorFlash 1s infinite; /* 闪烁变色效果 */
+            font-family: 'Pacifico', cursive;
+            animation: colorFlash 1s infinite;
         }
 
         @keyframes colorFlash {
@@ -166,24 +161,24 @@ nav ul li:hover {
             border-color: #1a73e8;
         }
 
-       button {
-    position: absolute;
-    right: 0;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 增加 box-shadow 过渡效果 */
-}
+        button {
+            position: absolute;
+            right: 0;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-button:hover {
-    background-color: #155cbc;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
-}
+        button:hover {
+            background-color: #155cbc;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
 
         #recommendations {
             margin-top: 30px;
@@ -197,18 +192,18 @@ button:hover {
         }
 
         .recommendation-item {
-    padding: 10px;
-    cursor: pointer;
-    color: #1a73e8;
-    border-bottom: 1px solid #f0f0f0;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* 增加 box-shadow 过渡效果 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-}
+            padding: 10px;
+            cursor: pointer;
+            color: #1a73e8;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-.recommendation-item:hover {
-    background-color: #f4f4f9;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 增强阴影效果 */
-}
+        .recommendation-item:hover {
+            background-color: #f4f4f9;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
 
         .recommendation-item:last-child {
             border-bottom: none;
@@ -261,6 +256,19 @@ button:hover {
     <div id="recommendations"></div>
 
     <script>
+        // 防抖函数
+        function debounce(fn, delay) {
+            let timeoutID;
+            return function(...args) {
+                if (timeoutID) {
+                    clearTimeout(timeoutID);
+                }
+                timeoutID = setTimeout(() => {
+                    fn(...args);
+                }, delay);
+            };
+        }
+
         // 控制背景音乐播放
         let isPlaying = false;
         const musicButton = document.getElementById('musicButton');
@@ -277,8 +285,8 @@ button:hover {
             isPlaying = !isPlaying;
         });
 
-        // 输入框内容变化时显示推荐内容
-        document.getElementById('searchInput').addEventListener('input', function() {
+        // 输入框内容变化时显示推荐内容（使用防抖处理）
+        document.getElementById('searchInput').addEventListener('input', debounce(function() {
             var inputValue = this.value;
             if (inputValue) {
                 fetch(`http://49.232.167.176:8086/advice/${inputValue}`)
@@ -300,14 +308,12 @@ button:hover {
             } else {
                 document.getElementById('recommendations').innerHTML = '';
             }
-        });
+        }, 200)); // 设置防抖时间为200ms
 
-        // 点击搜索按钮时跳转到结果页面
+        // 搜索按钮点击事件
         document.getElementById('searchButton').addEventListener('click', function() {
             var inputValue = document.getElementById('searchInput').value;
-            if (inputValue) {
-                window.location.href = `result.html?query=${encodeURIComponent(inputValue)}`;
-            }
+            window.location.href = `http://49.232.167.176:8086/search/${encodeURIComponent(inputValue)}`;
         });
     </script>
 </body>
