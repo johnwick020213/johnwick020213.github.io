@@ -281,7 +281,7 @@ button:hover {
         document.getElementById('searchInput').addEventListener('input', function() {
             var inputValue = this.value;
             if (inputValue) {
-                fetch(`httpsss://49.232.167.176:8086/advice/${inputValue}`)
+                fetch(`https://49.232.167.176:8086/advice/${inputValue}`)
                     .then(response => response.json())
                     .then(data => {
                         var recommendations = document.getElementById('recommendations');
