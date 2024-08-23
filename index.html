@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指针骑士搜索引擎</title>
+    <link rel="icon" type="image/jpeg" href="icon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Pacifico&display=swap" rel="stylesheet"> <!-- 引入好看的字体 -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('background1.jpg') no-repeat center center;
+            background-size: cover;
+            opacity: 0.5; /* 设置透明度 */
+            z-index: -1; /* 使背景图在内容下方 */
+        }
+
+        /* 任务栏样式 */
+        nav {
+            background-color: #1a73e8;
+            width: 100%;
+            padding: 10px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+    position: relative;
+    margin-right: 20px;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 增加 box-shadow 过渡效果 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    border-radius: 5px; /* 增加圆角 */
+}
+
+nav ul li:hover {
+    background-color: #155cbc;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 增强阴影效果 */
+}
+
+        /* 下拉菜单 */
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            color: black;
+            padding: 0;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul li:hover ul {
+            display: block;
+        }
+
+        nav ul li ul li {
+            margin: 0;
+            padding: 10px;
+            width: 200px;
+            white-space: nowrap;
+        }
+
+        nav ul li ul li a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        nav ul li ul li a:hover {
+            color: #1a73e8;
+        }
+
+        /* 播放音乐按钮 */
+        #musicButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #musicButton:hover {
+            background-color: #155cbc;
+        }
+
+        /* 搜索部分 */
+        h1 {
+            font-size: 5rem; /* 更大字体 */
+            margin: 50px 0 20px;
+            text-align: center;
+            font-family: 'Pacifico', cursive; /* 好看的字体 */
+            animation: colorFlash 1s infinite; /* 闪烁变色效果 */
+        }
+
+        @keyframes colorFlash {
+            0% { color: #ff4c4c; }
+            20% { color: #ffcc00; }
+            40% { color: #66ff66; }
+            60% { color: #ff66cc; }
+            80% { color: #9900ff; }
+            100% { color: #ff4c4c; }
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        input {
+            width: 400px;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            border: 1px solid #ccc;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        input::placeholder {
+            color: #bbb;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            box-shadow: 0 3px 10px rgba(26, 115, 232, 0.5);
+            border-color: #1a73e8;
+        }
+
+       button {
+    position: absolute;
+    right: 0;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 增加 box-shadow 过渡效果 */
+}
+
+button:hover {
+    background-color: #155cbc;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
+}
+
+        #recommendations {
+            margin-top: 30px;
+            width: 400px;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        .recommendation-item {
+    padding: 10px;
+    cursor: pointer;
+    color: #1a73e8;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* 增加 box-shadow 过渡效果 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+.recommendation-item:hover {
+    background-color: #f4f4f9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 增强阴影效果 */
+}
+
+        .recommendation-item:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 600px) {
+            input {
+                width: 90%;
+            }
+
+            #recommendations {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 播放背景音乐 -->
+    <audio id="backgroundMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- 任务栏部分 -->
+    <nav>
+        <ul>
+            <li>
+                小组源码
+                <ul>
+                    <li><a href="https://github.com/WangEdward1027/SearchEngine/">王绪飞</a></li>
+                    <li><a href="https://gitee.com/zjzhang2024/search-engine">张子健</a></li>
+                    <li><a href="https://github.com/johnwick020213/Search_Engines">甘博</a></li>
+                    <li><a href="https://gitee.com/zhanghangmei/search-engines">张航美</a></li>
+                    <li><a href="https://gitee.com/SherryJerez/search-engines">梁少琪</a></li>
+                    <li><a href="https://gitee.com/mengxi-baike/search-engines">韩冬辉</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- 播放音乐按钮 -->
+    <button id="musicButton">播放音乐</button>
+
+    <!-- 搜索引擎部分 -->
+    <h1>指针骑士搜索引擎</h1>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="白度一下，你想知道的我们都没有" />
+        <button id="searchButton">搜索</button>
+    </div>
+    <div id="recommendations"></div>
+
+    <script>
+        // 控制背景音乐播放
+        let isPlaying = false;
+        const musicButton = document.getElementById('musicButton');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+
+        musicButton.addEventListener('click', function() {
+            if (isPlaying) {
+                backgroundMusic.pause();
+                musicButton.textContent = '播放音乐';
+            } else {
+                backgroundMusic.play();
+                musicButton.textContent = '暂停音乐';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // 输入框内容变化时显示推荐内容
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var inputValue = this.value;
+            if (inputValue) {
+                fetch(`http://49.232.167.176:8086/advice/${inputValue}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var recommendations = document.getElementById('recommendations');
+                        recommendations.innerHTML = '';
+                        data.forEach(item => {
+                            var div = document.createElement('div');
+                            div.textContent = item;
+                            div.className = 'recommendation-item';
+                            div.addEventListener('click', function() {
+                                window.location.href = `result.html?query=${encodeURIComponent(item)}`;
+                            });
+                            recommendations.appendChild(div);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching advice:', error));
+            } else {
+                document.getElementById('recommendations').innerHTML = '';
+            }
+        });
+
+        // 点击搜索按钮时跳转到结果页面
+        document.getElementById('searchButton').addEventListener('click', function() {
+            var inputValue = document.getElementById('searchInput').value;
+            if (inputValue) {
+                window.location.href = `result.html?query=${encodeURIComponent(inputValue)}`;
+            }
+        });
+    </script>
+</body>
+</html>
