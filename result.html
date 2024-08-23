@@ -122,10 +122,10 @@ body::before {
     // 从 URL 中获取搜索关键词
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('query');
-    
+    s
     if (query) {
         // 从服务器获取搜索结果的 JSON 数据
-        fetch(`http://49.232.167.176:8086/search/${encodeURIComponent(query)}`)
+        fetch(`https://49.232.167.176:8086/search/${encodeURIComponent(query)}`)
             .then(response => response.json())
             .then(data => {
                 const resultsDiv = document.getElementById("results");
