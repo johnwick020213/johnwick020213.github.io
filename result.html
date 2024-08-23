@@ -60,7 +60,7 @@ body::before {
         .header .btn:hover {
             background-color: #0056b3;
         }
-
+s
         .header .easter-egg {
             background-color: #28a745;
         }
@@ -125,7 +125,7 @@ body::before {
     
     if (query) {
         // 从服务器获取搜索结果的 JSON 数据
-        fetch(`http://49.232.167.176:8086/search/${encodeURIComponent(query)}`)
+        fetch(`https://49.232.167.176:8086/search/${encodeURIComponent(query)}`)
             .then(response => response.json())
             .then(data => {
                 const resultsDiv = document.getElementById("results");
