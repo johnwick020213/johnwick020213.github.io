@@ -1,22 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>指针骑士搜索引擎</title>
-<<<<<<< Updated upstream
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f9;
-=======
     <link rel="icon" type="image/jpeg" href="icon.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Pacifico&display=swap" rel="stylesheet"> <!-- 引入好看的字体 -->
     <style>
         body {
             font-family: 'Roboto', sans-serif;
->>>>>>> Stashed changes
             margin: 0;
             padding: 0;
             display: flex;
@@ -25,21 +17,6 @@
             justify-content: flex-start;
             height: 100vh;
             color: #333;
-<<<<<<< Updated upstream
-        }
-
-        /* 任务栏样式 */
-        nav {
-            background-color: #1a73e8;
-            width: 100%;
-            padding: 10px 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-=======
             position: relative;
             overflow: hidden;
         }
@@ -68,7 +45,6 @@
             align-items: center;
         }
 
->>>>>>> Stashed changes
         nav ul {
             list-style: none;
             margin: 0;
@@ -77,19 +53,6 @@
         }
 
         nav ul li {
-<<<<<<< Updated upstream
-            position: relative;
-            margin-right: 20px;
-            padding: 10px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        nav ul li:hover {
-            background-color: #155cbc;
-        }
-=======
     position: relative;
     margin-right: 20px;
     padding: 10px;
@@ -104,7 +67,6 @@ nav ul li:hover {
     background-color: #155cbc;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 增强阴影效果 */
 }
->>>>>>> Stashed changes
 
         /* 下拉菜单 */
         nav ul li ul {
@@ -140,13 +102,6 @@ nav ul li:hover {
             color: #1a73e8;
         }
 
-<<<<<<< Updated upstream
-        /* 搜索部分 */
-        h1 {
-            font-size: 3rem;
-            margin: 50px 0 20px;
-            color: #1a73e8;
-=======
         /* 播放音乐按钮 */
         #musicButton {
             position: absolute;
@@ -181,7 +136,6 @@ nav ul li:hover {
             60% { color: #ff66cc; }
             80% { color: #9900ff; }
             100% { color: #ff4c4c; }
->>>>>>> Stashed changes
         }
 
         .search-container {
@@ -212,27 +166,6 @@ nav ul li:hover {
             border-color: #1a73e8;
         }
 
-<<<<<<< Updated upstream
-        button {
-            position: absolute;
-            right: 0;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            margin-left: -80px;
-        }
-
-        button:hover {
-            background-color: #155cbc;
-            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
-        }
-=======
        button {
     position: absolute;
     right: 0;
@@ -251,7 +184,6 @@ button:hover {
     background-color: #155cbc;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
 }
->>>>>>> Stashed changes
 
         #recommendations {
             margin-top: 30px;
@@ -261,22 +193,6 @@ button:hover {
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-<<<<<<< Updated upstream
-            padding: 10px;
-        }
-
-        .recommendation-item {
-            padding: 10px;
-            cursor: pointer;
-            color: #1a73e8;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background-color 0.2s ease;
-        }
-
-        .recommendation-item:hover {
-            background-color: #f4f4f9;
-        }
-=======
             padding: 10px;
         }
 
@@ -293,7 +209,6 @@ button:hover {
     background-color: #f4f4f9;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 增强阴影效果 */
 }
->>>>>>> Stashed changes
 
         .recommendation-item:last-child {
             border-bottom: none;
@@ -311,64 +226,6 @@ button:hover {
     </style>
 </head>
 <body>
-<<<<<<< Updated upstream
-    <!-- 任务栏部分 -->
-    <nav>
-        <ul>
-            <li>
-                小组源码
-                <ul>
-                    <li><a href="https://github.com/johnwick020213">成员1</a></li>
-                    <li><a href="https://github.com/johnwick020213">成员2</a></li>
-                    <li><a href="https://github.com/johnwick020213">成员3</a></li>
-                    <li><a href="https://github.com/johnwick020213">成员4</a></li>
-                    <li><a href="https://github.com/johnwick020213">成员5</a></li>
-                    <li><a href="https://github.com/johnwick020213">成员6</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-
-    -------
-
-    <!-- 搜索引擎部分 -->
-    <h1>指针骑士搜索引擎</h1>
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="白度一下，你想知道的我们都没有" />
-        <button id="searchButton">搜索</button>
-    </div>
-    <div id="recommendations"></div>
-
-    <script>
-        document.getElementById('searchInput').addEventListener('input', function() {
-            var inputValue = this.value;
-            if (inputValue) {
-                fetch(`http://49.232.167.176:8086/advice/${inputValue}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        var recommendations = document.getElementById('recommendations');
-                        recommendations.innerHTML = '';
-                        data.forEach(item => {
-                            var div = document.createElement('div');
-                            div.textContent = item;
-                            div.className = 'recommendation-item';
-                            div.addEventListener('click', function() {
-                                window.location.href = `http://49.232.167.176:8086/search/${item}`;
-                            });
-                            recommendations.appendChild(div);
-                        });
-                    })
-                    .catch(error => console.error('Error fetching advice:', error));
-            } else {
-                document.getElementById('recommendations').innerHTML = '';
-            }
-        });
-
-        document.getElementById('searchButton').addEventListener('click', function() {
-            var inputValue = document.getElementById('searchInput').value;
-            if (inputValue) {
-                window.location.href = `http://49.232.167.176:8086/search/${inputValue}`;
-=======
     <!-- 播放背景音乐 -->
     <audio id="backgroundMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
@@ -450,7 +307,6 @@ button:hover {
             var inputValue = document.getElementById('searchInput').value;
             if (inputValue) {
                 window.location.href = `result.html?query=${encodeURIComponent(inputValue)}`;
->>>>>>> Stashed changes
             }
         });
     </script>
