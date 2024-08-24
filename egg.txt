@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彩蛋页面</title>
+    <style>
+        /* 设置背景颜色为淡粉色 */
+        body {
+            background-color: #ffd1dc;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* 巨大文字的样式 */
+        .text {
+            font-size: 60px;
+            font-weight: bold;
+            animation: flash 1s infinite;
+            margin-bottom: 20px;
+            color: red; /* 添加默认颜色，避免初始不可见 */
+        }
+
+        /* 闪烁颜色的关键帧动画 */
+        @keyframes flash {
+            0% { color: red; }
+            20% { color: orange; }
+            40% { color: yellow; }
+            60% { color: green; }
+            80% { color: blue; }
+            100% { color: red; }
+        }
+
+        /* 图片样式 */
+        .image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* 返回首页按钮样式 */
+        .home-button {
+            background-color: #ff69b4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .home-button:hover {
+            background-color: #ff1493;
+        }
+
+        /* 返回按钮在左上角 */
+        .top-left {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 固定的返回首页按钮 -->
+    <a href="index.html" class="home-button top-left">返回首页</a>
+
+    <!-- 闪烁的巨大文字 -->
+    <div class="text">不是哥们，你真觉得我做的出来啊！</div>
+
+    <!-- 图片显示 -->
+    <img src="egg.jpg" alt="彩蛋图片" class="image">
+</body>
+</html>

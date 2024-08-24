@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egg Page</title>
+	<link rel="icon" type="image/jpeg" href="icon.jpg">
+
+    <style>
+        /* 设置全局样式 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* 更柔和的背景色 */
+            font-family: 'Helvetica', sans-serif;
+        }
+
+        /* 定义布局容器 */
+        .container {
+            text-align: center;
+            position: relative;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 80%; /* 扩大容器宽度 */
+            max-width: 1200px; /* 容器的最大宽度 */
+            margin: auto;
+        }
+
+        /* 闪烁文字的样式 */
+        .flashing-text {
+            font-size: 4rem; /* 扩大字体 */
+            font-weight: bold;
+            color: #333;
+            animation: flash 2s infinite;
+            margin-bottom: 50px; /* 增加文字与图片之间的距离 */
+        }
+
+        /* 闪烁效果 */
+        @keyframes flash {
+            0% { color: #e74c3c; }
+            25% { color: #f1c40f; }
+            50% { color: #2ecc71; }
+            75% { color: #3498db; }
+            100% { color: #9b59b6; }
+        }
+
+        /* 图片样式 */
+        .egg-image {
+            width: 200px; /* 扩大图片大小 */
+            height: auto;
+            border-radius: 15px;
+            border: 3px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px; /* 增加图片与按钮之间的距离 */
+        }
+
+        /* 返回按钮样式 */
+        .back-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        /* 返回按钮的悬停效果 */
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .flashing-text {
+                font-size: 3rem;
+            }
+
+            .egg-image {
+                width: 150px;
+            }
+
+            .container {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .flashing-text {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                width: 90%;
+            }
+
+            .egg-image {
+                width: 120px;
+            }
+
+            .back-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flashing-text">不是哥们，你真觉得我做的出来啊！</div>
+        <img src="egg.jpg" alt="Egg Image" class="egg-image">
+        <button class="back-btn" onclick="location.href='index.html'">返回首页</button>
+    </div>
+</body>
+</html>
