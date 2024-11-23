@@ -334,7 +334,7 @@ div {
 
             debounceTimeout = setTimeout(() => {
                 if (inputValue) {
-                    fetch(`http://49.232.167.176:8086/advice/${inputValue}`)
+                    fetch(`http://43.143.68.174:8086/advice/${inputValue}`)
                         .then(response => response.json())
                         .then(data => {
                             const recommendations = document.getElementById('recommendations');
