@@ -32,6 +32,12 @@
             opacity: 0.5;
             z-index: -1;
         }
+div {
+    display: flex; /* 水平排列 */
+    align-items: center; /* 垂直居中 */
+    gap: 10px; /* 图片和按钮之间的间距 */
+}
+
 
         nav {
             background-color: #ff99cc;
@@ -154,6 +160,21 @@
             font-family: 'Pacifico', cursive;
             animation: colorFlash 1s infinite;
         }
+	
+.image-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px; /* 添加圆角效果 */
+    margin-right: 10px; /* 与音乐按钮的间距 */
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.image-link:hover {
+    transform: scale(1.1); /* 鼠标悬停放大效果 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
 
         @keyframes colorFlash {
             0% { color: #ff4c4c; }
@@ -275,24 +296,26 @@
     <nav>
         <ul>
             <li>
-                小组源码
+                源码
                 <ul>
                     <li><a href="https://github.com/WangEdward1027/SearchEngine/">王绪飞</a></li>
                 </ul>
             </li>
-            <div id="extraButtons">
-    <a href="https://www.ecnu.edu.cn/">
-        <img src="1.jpg" alt="校徽" style="width: 200px; height: auto; border: none;">
-    </a>
-    <a href="http://www.cs.ecnu.edu.cn/">
-        <img src="2.jpg" alt="院徽" style="width: 200px; height: auto; border: none;">
-    </a>
+<div id="extraButtons">
+                <a href="http://home.cskaoyan.com/#/home" class="extra-button yellow">去王道学C++</a>
+                <a href="java.html" class="extra-button black">去黑马学Java</a>
+            </div>
+       
+        </ul>
+
+<div style="display: flex; align-items: center; gap: 10px;"> <!-- 添加 gap -->
+    <img src="1.jpg" alt="图片1" class="image-link" onclick="window.location.href='https://example1.com';" />
+    <img src="2.jpg" alt="图片2" class="image-link" onclick="window.location.href='https://example2.com';" />
+    <button id="musicButton" style="position: static;">播放音乐</button> <!-- 确保按钮没有绝对定位 -->
 </div>
 
-        </ul>
-    </nav>
 
-    <button id="musicButton">播放音乐</button>
+</nav>
 
     <h1>指针骑士搜索引擎</h1>
     <div class="search-container">
